@@ -8,6 +8,7 @@ const assert = require("assert");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const unitec = require("./routes/unitec");
+const port = process.env.PORT || 3006;
 console.clear();
 
 //Middleware configuration
@@ -17,6 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(auth);
 app.use(welcome);
 
+//Routers
+app.use("/api/unitec", unitec);
+
 //Via de acceso a raiz
 app.get("/", function (req, res) {
   var response = "Hello World";
@@ -24,12 +28,17 @@ app.get("/", function (req, res) {
   res.status(200).send(response);
 });
 
-//Routers
-app.use("/api/unitec", unitec);
-
-const port = process.env.PORT || 3006;
+mongoose
+  .connect("mongodb://localhost:27017/unitec", {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
+  .then((resp) => {
+    console.log("Connected to local mongodb\n");
+  })
+  .catch((err) => console.log("Some error has occured", err.message));
 db.connectDB(() => {
   app.listen(port, () => {
-    console.log(`\n${"-".repeat(80)}\nListeningg on port ${port}`);
+    console.log(`\n${"-".repeat(60)}\nListening on port ${port}`);
   });
 });

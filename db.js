@@ -6,6 +6,7 @@ const collectionName = "currentclasses";
 let mongodb;
 
 function connectDB(callback) {
+  
   mongoClient.connect(mongoURL, { useUnifiedTopology: true }, (err, client) => {
     mongodb = client.db(DataBaseName);
     callback();
