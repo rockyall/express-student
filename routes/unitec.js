@@ -1,63 +1,60 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
-const { Unitec } = require("../modules/unitec_model");
-const ObjectID = require("mongodb").ObjectID;
+const mongoose = require("mongoose");
+const { Subject } = require("../modules/unitec_model");
+const { ObjectID } = require("mongodb");
+
+// const Unitec = mongoose.model("unitec", SchemaUntec);
 
 router.get("/", (req, res) => {
-  FindAll(res);
-});
-
-router.get("/:name", (req, res) => {
-  try {
-    console.log(req.params);
-    db.getDB()
-      .find({ NameClass: req.params.name })
-      .toArray()
-      .then((ClassFiltered) => {
-        console.log(ClassFiltered);
-        res.send(ClassFiltered);
-      });
-    db.closeDB();
-  } catch (error) {
-    res.status(404).send("404 deadmau5 Not Found");
-  }
+  Subject.find({})
+    .then((resp) => {
+      res.json(resp);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
 });
 
 router.post("/save", (req, res) => {
   try {
     const element = req.body;
     console.log(element);
-    db.getDB().insertOne(element, function (err, res) {
-      if (err) throw err;
-      console.log("Document inserted");
-      db.closeDB();
+    const subject = new Subject({
+      Modulo: element.Modulo,
+      Faltas: element.Faltas,
+      Anio: element.Anio,
+      Seccion: element._RegistroClases__Seccion,
+      HoraInicio: element._RegistroClases__horaInicio,
+      ExamenI: element._RegistroClases__examenI,
+      ExamenII: element._RegistroClases__examenII,
+      ExamenIII: element._RegistroClases__examenIII,
+      Acumulacion: element._RegistroClases__Acumulacion,
+      Reposicion: element._RegistroClases__repos,
+      Nota: element._RegistroClases__nota,
+      Estado: element._RegistroClases__Estado,
+      NameClass: element.NombreClase,
+      lstSemana: element.lstSemana,
+      Cookies: element.cookies,
     });
-    res.send(element);
+
+    subject
+      .save()
+      .then((resp) => {
+        console.log(resp);
+        res.send("Saved");
+      })
+      .catch((error) => {
+        console.log(error);
+        res.send("Error");
+      });
   } catch (error) {}
 });
 
 router.put("/update", (req, res) => {
   try {
-    let CommingClass = req.body;
-    console.log("This is the result", CommingClass);
-    var OriginalClass = null;
-    // var objectID = new objectId(CommingClass._id);
-    db.getDB()
-      .findOne({ _id: new ObjectID(CommingClass._id) })
-      .then((resp) => {
-        OriginalClass = resp;
-        db.getDB()
-          .updateOne(
-            { _id: new ObjectID(CommingClass._id) },
-            { $set: { Seccion: CommingClass.Seccion } }
-          )
-          .then((resp) => {
-            console.log("The document has been updated\n");
-            console.log(resp);
-            res.send(resp);
-          });
-      });
+    
   } catch (error) {
     res.send("There were a problem in the put method", error);
   }

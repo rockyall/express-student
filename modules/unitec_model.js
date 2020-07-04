@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const SchemaUntec = new mongoose.Schema({
+const SchemaSubject = new mongoose.Schema({
   Modulo: { type: Number, required: true },
   Faltas: { type: Number, required: true },
   Anio: { type: Number, required: true },
@@ -32,6 +32,7 @@ const SchemaUntec = new mongoose.Schema({
   Cookies: [],
 });
 
-const Unitec = mongoose.model("unitec", SchemaUntec);
+const Subject = mongoose.model("Subjects", SchemaSubject);
+const Subject_log = mongoose.model("Subjects_log", SchemaSubject);
 
-module.exports.Unitec = Unitec;
+module.exports = { Subject };

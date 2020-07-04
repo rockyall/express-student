@@ -37,8 +37,7 @@ mongoose
     console.log("Connected to local mongodb\n");
   })
   .catch((err) => console.log("Some error has occured", err.message));
-db.connectDB(() => {
-  app.listen(port, () => {
-    console.log(`\n${"-".repeat(60)}\nListening on port ${port}`);
-  });
+
+app.listen(port, () => {
+  console.log(`\n${"-".repeat(60)}\nListening on port ${port}`);
 });
