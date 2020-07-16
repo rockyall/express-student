@@ -32,7 +32,29 @@ const SchemaSubject = new mongoose.Schema({
   Cookies: [],
 });
 
+function convertData(element) {
+  const resp = {
+    Modulo: element.Modulo,
+    Faltas: element._RegistroClases__Faltas,
+    Anio: element.Anio,
+    Seccion: element._RegistroClases__Seccion,
+    HoraInicio: element._RegistroClases__horaInicio,
+    ExamenI: element._RegistroClases__examenI,
+    ExamenII: element._RegistroClases__examenII,
+    ExamenIII: element._RegistroClases__examenIII,
+    Acumulacion: element._RegistroClases__Acumulacion,
+    Reposicion: element._RegistroClases__repos,
+    Nota: element._RegistroClases__nota,
+    Estado: element._RegistroClases__Estado,
+    NameClass: element.NombreClase,
+    lstSemana: element.lstSemana,
+    Cookies: element.cookies,
+  };
+
+  return resp;
+}
+
 const Subject = mongoose.model("Subjects", SchemaSubject);
 const Subject_log = mongoose.model("Subjects_log", SchemaSubject);
 
-module.exports = { Subject };
+module.exports = { Subject, convertData };
