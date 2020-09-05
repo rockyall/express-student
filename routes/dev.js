@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 
 router.get("/", (req, res) => {
   try {
-    res.send("This http method works fine");
+    res.send("This http method works fine\n");
   } catch (error) {
-    res.send("The error works");
+    res.send("The error works\n");
   }
 });
 
