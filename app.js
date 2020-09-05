@@ -8,6 +8,7 @@ const assert = require("assert");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const unitec = require("./routes/unitec");
+const dev = require("./routes/dev");
 const port = process.env.PORT || 3006;
 console.clear();
 
@@ -20,6 +21,7 @@ app.use(welcome);
 
 //Routers
 app.use("/api/unitec", unitec);
+app.use("/api/dev", dev);
 
 //Via de acceso a raiz
 app.get("/", function (req, res) {
