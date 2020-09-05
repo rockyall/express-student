@@ -29,13 +29,13 @@ const SchemaSubject = new mongoose.Schema({
       Actividades: { type: Array, required: true },
     },
   ],
-  Cookies: [],
+  // Cookies: [],
 });
 
 function convertData(element) {
   const resp = {
     Modulo: element.Modulo,
-    Faltas: element._RegistroClases__Faltas,
+    Faltas: element.Faltas,
     Anio: element.Anio,
     Seccion: element._RegistroClases__Seccion,
     HoraInicio: element._RegistroClases__horaInicio,

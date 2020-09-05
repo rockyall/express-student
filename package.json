@@ -9,9 +9,9 @@
   "author": "Ricardo Ochoa",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "joi": "^14.3.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.20"
   },
