@@ -4,7 +4,7 @@ const { User } = require("../modules/user_model");
 const { ValidateInput } = require("../validations/Schema_User");
 
 router.post("test", (req, resp) => {
-  res.send("This is the new change");
+  resp.send("This is the new change");
 });
 
 router.post("/save", async (req, res) => {
