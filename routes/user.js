@@ -3,10 +3,6 @@ const router = express.Router();
 const { User } = require("../modules/user_model");
 const { ValidateInput } = require("../validations/Schema_User");
 
-router.get("test", (req, resp) => {
-  resp.send("This is the new change");
-});
-
 router.post("/save", async (req, res) => {
   const element = req.body;
   console.log(element);
