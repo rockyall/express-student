@@ -43,5 +43,6 @@ mongoose
   .catch((err) => console.log("Some error has occured", err.message));
 
 app.listen(port, () => {
-  console.log(`\n${"-".repeat(60)}\nListening on port ${port}`);
+  console.log(`\n${"-".repeat(60)}\nURL: http://localhost:${port}`);
+  console.log(`Listening on port ${port}`);
 });
